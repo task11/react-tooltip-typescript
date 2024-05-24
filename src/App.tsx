@@ -1,7 +1,7 @@
 import Tooltip from "./components/Tooltip";
+import ConfirmTooltip from "./components/ConfirmTooltip";
 
 import "./App.css";
-import ConfirmTooltip from "./components/ConfirmTooltip";
 
 export default function App() {
   return (
