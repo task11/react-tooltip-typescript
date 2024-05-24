@@ -1,0 +1,197 @@
+.container-layout {
+  display: flex;
+  background-color: #f3f7fa;
+}
+
+.demo-section {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 0px 200px;
+  gap: 100px;
+}
+
+.container-layout .demo-section {
+  width: 100%;
+}
+
+.demo-direction {
+  margin-top: 100px;
+  margin-left: 100px;
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+}
+
+.demo-delay {
+  margin-left: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.demo-custom-direction {
+  margin-left: 100px;
+  width: fit-content;
+}
+
+.demo-custom {
+  margin-left: 100px;
+  display: flex;
+  gap: 5px;
+}
+
+.demo-etc {
+  margin-left: 100px;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.top-wrapper {
+  display: flex;
+  gap: 2px;
+  margin: 0px 70px;
+  white-space: nowrap;
+}
+
+.center-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.left-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  white-space: nowrap;
+}
+
+.right-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  white-space: nowrap;
+}
+
+.bottom-wrapper {
+  display: flex;
+  gap: 2px;
+  margin: 0px 70px;
+  white-space: nowrap;
+}
+
+.direction-parent-overflow {
+  height: 100px;
+  overflow: scroll;
+}
+
+.test-button {
+  width: 70px;
+  border-radius: 4px;
+  background: #1aab8a;
+  color: #fff;
+  border: none;
+  position: relative;
+  font-size: 15px;
+  padding: 2px 0;
+  cursor: pointer;
+  transition: 800ms ease all;
+  outline: none;
+}
+
+.demo-delay .test-button {
+  width: 150px;
+}
+
+.test-button::before,
+.test-button::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 2px;
+  width: 0;
+  background: #1aab8a;
+  transition: 400ms ease all;
+}
+
+.test-button::after {
+  right: inherit;
+  top: inherit;
+  left: 0;
+  bottom: 0;
+}
+
+.test-button:hover {
+  background: #fff;
+  color: #1aab8a;
+}
+
+.test-button:hover::before,
+.test-button:hover::after {
+  width: 100%;
+  transition: 800ms ease all;
+}
+
+.yellow {
+  background-color: #fff1aa;
+  color: black;
+}
+
+.yellow::before,
+.yellow::after {
+  background: #fff1aa;
+}
+
+.yellow:hover {
+  background: #fff;
+  color: #fff1aa;
+}
+
+.pink {
+  background-color: #fac;
+  color: #fff;
+}
+
+.pink {
+  background-color: #fac;
+  color: #fff;
+}
+
+.pink::before,
+.pink::after {
+  background: #fac;
+}
+
+.pink:hover {
+  background: #fff;
+  color: #fac;
+}
+
+.disabled {
+  background-color: #333;
+  color: #fff;
+}
+
+.disabled {
+  background-color: #333;
+  color: #fff;
+}
+
+.disabled::before,
+.disabled::after {
+  background: #333;
+}
+
+.disabled:hover {
+  background: #fff;
+  color: #333;
+}
+
+.test-text {
+  width: auto;
+  padding: 5px;
+  background-color: #e8e5e5;
+  border-radius: 8px;
+}
