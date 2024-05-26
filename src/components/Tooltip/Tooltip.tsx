@@ -12,7 +12,7 @@ import {
 } from "../../config/constants";
 import { ITooltipClasses, TooltipDirection, TooltipTitle } from "../../types";
 
-import TooltipWrapper from "./TooltipWrapper";
+import TooltipFrame from "./TooltipFrame";
 
 import "./Tooltip.css";
 
@@ -62,7 +62,7 @@ export default function Tooltip({
       >
         {children}
       </div>
-      <TooltipWrapper
+      <TooltipFrame
         ref={tooltipRef}
         title={title}
         direction={direction}

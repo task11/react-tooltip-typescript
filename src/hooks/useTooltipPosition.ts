@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 import {
   calculateElementPosition,
   setPositionElement,
-} from "../utils/Tooltip.helpers";
+} from "../utils/tooltip.helpers";
 
 import { TooltipDirection } from "../types";
 

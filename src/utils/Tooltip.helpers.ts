@@ -118,13 +118,7 @@ export function calculateElementPosition(
       ),
   };
 
-  const calculatePosition = positionCalculators[direction];
-
-  if (!calculatePosition) {
-    throw new Error(`Error Direction: ${direction}`);
-  }
-
-  return calculatePosition();
+  return positionCalculators[direction]();
 }
 export function setPositionElement(
   element: HTMLDivElement,

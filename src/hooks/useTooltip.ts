@@ -1,4 +1,5 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
+
 import {
   DEFAULT_TOOLTIP_ENTER_DELAY,
   DEFAULT_TOOLTIP_LEAVE_DELAY,
@@ -35,15 +36,22 @@ export default function useTooltip({
     }, delay || 0);
   };
 
-  const handleTooltipShow = () => handleVisibility(true, enterDelay);
+  const handleTooltipShow = useCallback(() => {
+    handleVisibility(true, enterDelay);
+  }, [handleVisibility, enterDelay]);
 
-  const handleTooltipHide = () =>
+  const handleTooltipHide = useCallback(() => {
     handleVisibility(
       false,
       hoverNotHidden ? TOOLTIP_HOVER_NOT_HIDDEN_DELAY : leaveDelay
     );
+  }, [handleVisibility, hoverNotHidden, leaveDelay]);
 
-  const handleTooltipHover = () => hoverNotHidden && handleVisibility(true);
+  const handleTooltipHover = useCallback(() => {
+    if (hoverNotHidden) {
+      handleVisibility(true);
+    }
+  }, [handleVisibility, hoverNotHidden]);
 
   useEffect(() => {
     return () => clearTimers();

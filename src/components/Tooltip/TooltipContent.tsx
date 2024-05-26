@@ -1,4 +1,4 @@
-import { getArrowDirectionStyles } from "../../utils/Tooltip.helpers";
+import { getArrowDirectionStyles } from "../../utils/tooltip.helpers";
 
 import { ITooltipClasses, TooltipDirection, TooltipTitle } from "../../types";
 

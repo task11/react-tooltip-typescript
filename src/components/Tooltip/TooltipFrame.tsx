@@ -17,7 +17,7 @@ interface Props {
   onMouseLeave: () => void;
 }
 
-export default forwardRef(function TooltipWrapper(
+export default forwardRef(function TooltipFrame(
   {
     title,
     direction,
