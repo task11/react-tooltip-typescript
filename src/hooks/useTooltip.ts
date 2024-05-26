@@ -21,10 +21,10 @@ export default function useTooltip({
   const enterTimeoutRef = useRef<number | undefined>();
   const leaveTimeoutRef = useRef<number | undefined>();
 
-  const clearTimers = () => {
+  const clearTimers = useCallback(() => {
     clearTimeout(enterTimeoutRef.current);
     clearTimeout(leaveTimeoutRef.current);
-  };
+  }, []);
 
   const handleVisibility = useCallback(
     (visible: boolean, delay?: number) => {
