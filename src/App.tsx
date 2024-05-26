@@ -1,4 +1,4 @@
-import Tooltip from "./components/Tooltip";
+import { Tooltip } from "./components/Tooltip";
 import ConfirmTooltip from "./components/ConfirmTooltip";
 
 import "./App.css";

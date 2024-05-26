@@ -1,11 +1,6 @@
-import { useEffect, useRef, useState } from "react";
-import { createPortal } from "react-dom";
+import useTooltip from "../../hooks/useTooltip";
+import useTooltipPosition from "../../hooks/useTooltipPosition";
 
-import {
-  calculateElementPosition,
-  getArrowDirectionStyles,
-  setPositionElement,
-} from "./Tooltip.helpers";
 import {
   DEFAULT_TOOLTIP_ARROW,
   DEFAULT_TOOLTIP_CLASSES,
@@ -14,9 +9,10 @@ import {
   DEFAULT_TOOLTIP_ENTER_DELAY,
   DEFAULT_TOOLTIP_HOVER_NOT_HIDDEN,
   DEFAULT_TOOLTIP_LEAVE_DELAY,
-  TOOLTIP_HOVER_NOT_HIDDEN_DELAY,
 } from "../../config/constants";
 import { ITooltipClasses, TooltipDirection, TooltipTitle } from "../../types";
+
+import TooltipWrapper from "./TooltipWrapper";
 
 import "./Tooltip.css";
 
@@ -43,50 +39,17 @@ export default function Tooltip({
   classes = DEFAULT_TOOLTIP_CLASSES,
   disable = DEFAULT_TOOLTIP_DISABLE,
 }: Props) {
-  const [isVisible, setIsVisible] = useState(false);
-  const enterTimeoutRef = useRef<number | undefined>();
-  const leaveTimeoutRef = useRef<number | undefined>();
-  const childrenRef = useRef<HTMLDivElement | null>(null);
-  const tooltipRef = useRef<HTMLDivElement | null>(null);
+  const {
+    isVisible,
+    handleTooltipHide,
+    handleTooltipHover,
+    handleTooltipShow,
+  } = useTooltip({ enterDelay, leaveDelay, hoverNotHidden });
 
-  const clearTimers = () => {
-    clearTimeout(enterTimeoutRef.current);
-    clearTimeout(leaveTimeoutRef.current);
-  };
-
-  const handleVisibility = (visible: boolean, delay?: number) => {
-    clearTimers();
-
-    const timeoutRef = visible ? enterTimeoutRef : leaveTimeoutRef;
-
-    timeoutRef.current = window.setTimeout(() => {
-      setIsVisible(visible);
-    }, delay || 0);
-  };
-
-  const handleTooltipShow = () => handleVisibility(true, enterDelay);
-
-  const handleTooltipHide = () =>
-    handleVisibility(
-      false,
-      hoverNotHidden ? TOOLTIP_HOVER_NOT_HIDDEN_DELAY : leaveDelay
-    );
-
-  const handleTooltipHover = () => hoverNotHidden && handleVisibility(true);
-
-  useEffect(() => () => clearTimers(), []);
-
-  useEffect(() => {
-    if (!isVisible || !tooltipRef.current || !childrenRef.current) return;
-
-    const { offsetX, offsetY } = calculateElementPosition(
-      childrenRef.current,
-      tooltipRef.current,
-      direction
-    );
-
-    setPositionElement(tooltipRef.current, offsetX, offsetY);
-  }, [isVisible, direction]);
+  const { childrenRef, tooltipRef } = useTooltipPosition({
+    isVisible,
+    direction,
+  });
 
   if (disable) return <>{children}</>;
 
@@ -99,28 +62,16 @@ export default function Tooltip({
       >
         {children}
       </div>
-      {isVisible &&
-        createPortal(
-          <div
-            ref={tooltipRef}
-            className="tooltip-container"
-            onMouseEnter={handleTooltipHover}
-            onMouseLeave={handleTooltipHide}
-          >
-            <div className="tooltip-inner" style={{ ...classes.tooltip }}>
-              {title}
-            </div>
-            {arrow && (
-              <div
-                className={`tooltip-arrow ${getArrowDirectionStyles(
-                  direction
-                )}`}
-                style={{ ...classes.arrow }}
-              />
-            )}
-          </div>,
-          document.body
-        )}
+      <TooltipWrapper
+        ref={tooltipRef}
+        title={title}
+        direction={direction}
+        isVisible={isVisible}
+        arrow={arrow}
+        classes={classes}
+        onMouseEnter={handleTooltipHover}
+        onMouseLeave={handleTooltipHide}
+      />
     </div>
   );
 }

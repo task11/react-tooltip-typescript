@@ -1,5 +1,5 @@
-import { TOOLTIP_OFFSET } from "../../config/constants";
-import { TooltipDirection } from "../../types/tooltip";
+import { TOOLTIP_OFFSET } from "../config/constants";
+import { TooltipDirection } from "../types/tooltip";
 
 export function calculateElementPosition(
   referenceElement: HTMLDivElement,
