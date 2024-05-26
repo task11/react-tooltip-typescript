@@ -58,7 +58,7 @@ export default function useTooltip({
 
   useEffect(() => {
     return () => clearTimers();
-  }, []);
+  }, [clearTimers]);
 
   return {
     isVisible,
