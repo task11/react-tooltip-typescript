@@ -26,15 +26,18 @@ export default function useTooltip({
     clearTimeout(leaveTimeoutRef.current);
   };
 
-  const handleVisibility = (visible: boolean, delay?: number) => {
-    clearTimers();
+  const handleVisibility = useCallback(
+    (visible: boolean, delay?: number) => {
+      clearTimers();
 
-    const timeoutRef = visible ? enterTimeoutRef : leaveTimeoutRef;
+      const timeoutRef = visible ? enterTimeoutRef : leaveTimeoutRef;
 
-    timeoutRef.current = window.setTimeout(() => {
-      setIsVisible(visible);
-    }, delay || 0);
-  };
+      timeoutRef.current = window.setTimeout(() => {
+        setIsVisible(visible);
+      }, delay || 0);
+    },
+    [clearTimers, setIsVisible]
+  );
 
   const handleTooltipShow = useCallback(() => {
     handleVisibility(true, enterDelay);
